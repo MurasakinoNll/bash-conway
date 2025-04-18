@@ -7,7 +7,7 @@
 
 //using ifdef for when compile target is either windows or linux, this will be used multiple more times in the project
 #ifdef _WIN32
-	#include <curses.h>	
+	#include <pdcurses/curses.h>	
 	#include <windows.h>   
 #else
 	#include <ncurses.h>   //using ncurses on unix and pdcurses for windows
@@ -228,7 +228,7 @@ int main(int argc, char **argv) {
         	draw_grid("setup: click to toggle cell (#). press 's' to start simulation, 'w' to save setup.");
     	} else if (ch == KEY_MOUSE) {
         	MEVENT event;
-        	if (getmouse(&event) == OK) {
+        	if (wgetmouse(stdscr, &event) == OK) {
             	// only respond if the click is inside our grid area to prevent miss-clicks
             	if (event.y >= 0 && event.y < rows && event.x >= 0 && event.x < cols) {
                 	// toggle logic
